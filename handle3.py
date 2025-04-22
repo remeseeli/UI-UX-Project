@@ -62,6 +62,46 @@ KV = '''
                 MDList:
                     id: task_list
                     padding: 0
+
+        #Floating Add Button
+        MDFloatingActionButton:
+            icon: "plus"
+            md_bg_color: app.theme_cls.primary_color
+            pos_hint: {"center_x": 0.5}
+            elevation_normal: 8
+            on_release: root.show_task_menu()
+
+        #Bottom Icon Bar
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(72)
+            padding: dp(24), dp(12)
+            spacing: dp(48)
+            pos_hint: {"center_x": 0.5}
+            md_bg_color: 0.95, 0.95, 0.95, 1
+            halign: "center"
+
+            Widget:  # Spacer for left alignment
+
+            MDIconButton:
+                icon: "home"
+                icon_size: "36sp"
+                theme_icon_color: "Custom"
+                icon_color: 0.3, 0.3, 0.3, 1
+
+            MDIconButton:
+                icon: "calendar"
+                icon_size: "36sp"
+                theme_icon_color: "Custom"
+                icon_color: 0.3, 0.3, 0.3, 1
+
+            MDIconButton:
+                icon: "cog"
+                icon_size: "36sp"
+                theme_icon_color: "Custom"
+                icon_color: 0.3, 0.3, 0.3, 1
+
+            Widget: 
 '''
 
 class TaskManagerScreen(MDScreen):
@@ -127,7 +167,7 @@ class TaskManagerScreen(MDScreen):
     def close_menu(self, instance):
         self.dialog.dismiss()
 
-    #Function to add task (not working)
+    #Function to add task
     def add_task(self, instance):
         content = self.dialog.content_cls
         title = content.title_field.text
@@ -182,7 +222,7 @@ class TaskManagerApp(MDApp):
             pos_hint={"right": 0.95, "bottom": 0.05},
             on_release=lambda x: screen.show_task_menu(),
         )
-        screen.add_widget(fab)
+
 
         return screen
 
